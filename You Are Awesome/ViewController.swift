@@ -10,11 +10,19 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var viewLabel: UILabel!
+    
+    @IBOutlet weak var imageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
 
-
+    @IBAction func showMessageButton(_ sender: Any) {
+        viewLabel.text = "You are awesome!"
+        viewLabel.textColor = UIColor.systemRed
+        imageView.image = UIImage(named: "image0")
+    }
+    
 }
 
