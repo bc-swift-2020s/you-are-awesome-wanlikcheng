@@ -42,6 +42,6 @@ class ViewController: UIViewController {
         } while imageNumber == newImageNumber
         imageNumber = newImageNumber
         imageView.image = UIImage(named: "image\(imageNumber)")
-        
+        //pls work
     }
 }

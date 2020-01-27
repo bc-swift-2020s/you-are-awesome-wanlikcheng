@@ -1,26 +1,29 @@
 import UIKit
 
-//var rollValue = Int.random(in: 1...6)
-//var rollNumber = 1
-//print("Roll number: \(rollNumber) was a \(rollValue)")
-//while rollValue != 6
-//{
-//    rollValue = Int.random(in: 1...6)
-//    rollNumber += 1
-//    print("Roll number: \(rollNumber) was a \(rollValue)")
-//}
-//print("It took \(rollNumber) rolls to roll a 6.")
+var str = "Hello, playground"
 
-var rollValue: Int
-var rollNumber = 0
-repeat
+for count in 0...10
 {
-    rollValue = Int.random(in: 1...6)
-    rollNumber += 1
-    print("Roll number: \(rollNumber) was a \(rollValue)")
-} while rollValue != 6
-print("It took \(rollNumber) rolls to roll a 6.")
+    print(count)
+}
 
-var enrollment: [String] = []
+print("Tubbies Challenge")
+var tubbies = ["TW", "D", "Lala", "Po"]
 
-var anotherCourseEnrollment = [String]()
+// closed range
+for tubbyNumber in 0...tubbies.count - 1
+{
+    print(tubbies[tubbyNumber])
+}
+
+// half open range - up to but won't reach
+for tubbyNumber in 0..<tubbies.count
+{
+    print(tubbies[tubbyNumber])
+}
+
+print("\nIterate through an array")
+for tubby in tubbies
+{
+    print(tubby)
+}
