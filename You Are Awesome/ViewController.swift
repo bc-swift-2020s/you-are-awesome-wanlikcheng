@@ -14,38 +14,22 @@ class ViewController: UIViewController {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
+    // initialize variables
     var imageNumber = -1
     var messageNumber = -1
+    var soundNumber = -1
     let totalImages = 9
+    var totalNumberOfSounds = 6
     var audioPlayer = AVAudioPlayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         messageLabel.text = ""
     }
-
-    @IBAction func messageButtonPressed(_ sender: UIButton) {
-        let messages = ["You are awesome!", "You are great!", "You are fantastic!", "You are fabulous!", "You are basically Steve Jobs and Bill Gates combined!", "You are a superb programmer bro!"]
-        
-        var newMessageNumber: Int
-        repeat
-        {
-            print("We had a repeating value")
-            newMessageNumber = Int.random(in: 0...messages.count - 1)
-        } while messageNumber == newMessageNumber
-        messageNumber = newMessageNumber
-        messageLabel.text = messages[newMessageNumber]
-        
-        var newImageNumber: Int
-        repeat
-        {
-            print("We had a repeating image")
-            newImageNumber = Int.random(in: 0...totalImages)
-        } while imageNumber == newImageNumber
-        imageNumber = newImageNumber
-        imageView.image = UIImage(named: "image\(imageNumber)")
-        
-        if let sound = NSDataAsset(name: "sound0")
+    
+    // play sound function
+    func playSound(name: String) {
+        if let sound = NSDataAsset(name: name)
         {
             do
             {
@@ -62,5 +46,35 @@ class ViewController: UIViewController {
         {
             print("ERROR: Could not read data from sound file.")
         }
+    }
+    
+    // function that generates non repeating random numbers
+    func nonRepeatingRandom(originalNumber: Int, upperLimit: Int) -> Int
+    {
+        var newNumber: Int
+        repeat
+        {
+            print("We had a repeating value")
+            newNumber = Int.random(in: 0...upperLimit)
+        } while originalNumber == newNumber
+        return newNumber
+    }
+    
+    @IBAction func messageButtonPressed(_ sender: UIButton) {
+        // array of messages
+        let messages = ["You are awesome!", "You are great!", "You are fantastic!", "You are fabulous!", "You are basically Steve Jobs and Bill Gates combined!", "You are a superb programmer bro!"]
+        
+        // messages
+        messageNumber = nonRepeatingRandom(originalNumber: messageNumber, upperLimit: messages.count - 1)
+        messageLabel.text = messages[messageNumber]
+        
+        // images
+        imageNumber = nonRepeatingRandom(originalNumber: imageNumber, upperLimit: totalImages - 1)
+        imageView.image = UIImage(named: "image\(imageNumber)")
+        
+        // sounds
+        soundNumber = nonRepeatingRandom(originalNumber: soundNumber, upperLimit: totalNumberOfSounds - 1)
+        print("Sound number is \(soundNumber)")
+        playSound(name: "sound\(soundNumber)")
     }
 }
