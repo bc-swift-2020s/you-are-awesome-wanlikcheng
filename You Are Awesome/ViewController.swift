@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
 
@@ -16,13 +17,14 @@ class ViewController: UIViewController {
     var imageNumber = -1
     var messageNumber = -1
     let totalImages = 9
+    var audioPlayer = AVAudioPlayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         messageLabel.text = ""
     }
 
-    @IBAction func showMessageButton(_ sender: UIButton) {
+    @IBAction func messageButtonPressed(_ sender: UIButton) {
         let messages = ["You are awesome!", "You are great!", "You are fantastic!", "You are fabulous!", "You are basically Steve Jobs and Bill Gates combined!", "You are a superb programmer bro!"]
         
         var newMessageNumber: Int
@@ -42,6 +44,23 @@ class ViewController: UIViewController {
         } while imageNumber == newImageNumber
         imageNumber = newImageNumber
         imageView.image = UIImage(named: "image\(imageNumber)")
-        //pls work
+        
+        if let sound = NSDataAsset(name: "sound0")
+        {
+            do
+            {
+                try audioPlayer = AVAudioPlayer(data: sound.data)
+                audioPlayer.play()
+            }
+            catch
+            {
+                print("ERROR: \(error.localizedDescription) could not initialize AVAudioPlayer object")
+            }
+            
+        }
+        else
+        {
+            print("ERROR: Could not read data from sound file.")
+        }
     }
 }
